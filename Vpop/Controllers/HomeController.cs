@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Vpop.Models;
@@ -22,7 +23,11 @@ namespace Vpop.Controllers
         {
             return View();
         }
-
+        public IActionResult Main(string custname)
+        {
+            HttpContext.Session.SetString("CustName", custname);
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();

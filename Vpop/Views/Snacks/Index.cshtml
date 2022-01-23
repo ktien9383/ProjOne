@@ -1,0 +1,44 @@
+﻿@model Vpop.ViewModels.OrderSnacksViewModel;
+
+@{
+    ViewData["Title"] = "Snacks Order Page";
+    Layout = "_MainMenu";
+}
+
+ <h3 style="text-align: center">Snacks Order Form</h3>
+
+ <form asp-controller="Snacks" asp-action="Index" method="post">
+      <div>
+            <input type="hidden" name="Custname" value=" ">
+      </div>
+      <div>
+          <label>Pick a snack below</label><br />
+          <p>
+              @foreach (var snack in Model.Snacks1)
+              {
+                 <input type="radio" name="Item" id="@snack.Key" value="@snack.Value" checked=@(snack.Key == "Vietnamese Egg Rolls ")/>
+                 <label for="@snack.Key">@snack.Value</label> 
+              }
+            <br />
+              @foreach (var snack in Model.Snacks2)
+              {
+                 <input type="radio" name="Item" id="@snack.Key" value="@snack.Value" checked=@(snack.Key == "Vietnamese Egg Rolls ")/>
+                 <label for="@snack.Key">@snack.Value</label>   
+              }
+              <span asp-validation-for="Item"></span>
+          </p>
+      </div>
+       <div>
+           <p>
+               <input type="hidden" name="Category" value="Snacks">
+               <input type="hidden" name="Currdate" value="@DateTime.Now.ToString("MM/dd/yyyy")">
+           </p>
+       </div>
+       <div>
+           <p>
+              <input type="submit" value="Submit">
+           </p>
+       </div>
+ </form>
+ <hr />
+ 

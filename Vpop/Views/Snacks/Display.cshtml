@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Snacks Order Confirmation Page";
+    Layout = "_MainMenu";
+}
+
+<div>
+    <p>@ViewBag.message</p>
+
+    <table class="table">
+        <tr>
+            <th>
+                Order Number
+            </th>
+            <th>
+                Customer Name
+            </th>
+            <th>
+                Category
+            </th>
+            <th>
+                Item
+            </th>   
+            <th>
+                Price
+            </th>
+             <th>
+                Order Date
+            </th>   
+        </tr>
+        <tr>
+            <td>@ViewBag.order.Id</td>
+            <td>@ViewBag.order.Custname</td>
+            <td>@ViewBag.order.Category</td>
+            <td>@ViewBag.order.Item</td>
+            <td>$@ViewBag.order.Price</td>
+            <td>@ViewBag.order.Currdate</td>
+        </tr>
+    </table>
+</div>

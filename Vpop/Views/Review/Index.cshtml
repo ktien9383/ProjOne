@@ -1,0 +1,59 @@
+﻿@{
+    Layout = "_MainMenu";
+}
+
+@if (ViewBag.orders.Count > 0)
+{
+    <div>
+        <h3 style="text-align: center">@ViewBag.title</h3>
+        <form asp-controller="Review" asp-action="Determine" method="post">
+            <table class="table">
+                <tr>
+                    <td>Order Date: @ViewBag.currdate</td>
+                </tr>
+                <tr>
+                    <td>Customer Email: @ViewBag.custname</td>
+                </tr>
+                <tr>
+                    <th>
+                        Order Number
+                    </th>
+                    <th>
+                        Category
+                    </th>
+                    <th>
+                        Item
+                    </th>   
+                    <th>
+                        Price
+                    </th>  
+                    <th class="text-danger">
+                        Cancel Orders
+                    </th>   
+                    <th class="text-success">
+                        Update Order
+                    </th>   
+                </tr>
+                @foreach (var ord in ViewBag.orders)
+                {
+                    <tr>
+                        <td>@ord.Id</td>
+                        <td>@ord.Category</td>
+                        <td>@ord.Item</td>
+                        <td>$@ord.Price</td>
+                        <td><input type="checkbox" name="cancelOrderIds" value=@ord.Id></td>
+                        <td><input type="radio" name="updateOrderId" value=@ord.Id /></td>
+                    </tr>
+                }
+            </table>
+            <button type="submit" name="cmd" value="Cancel" class="btn-danger">Cancel Orders</button>
+            <button type="submit" name="cmd" value="Update" class="btn-success">Update Order</button>
+            <button type="submit" name="cmd" value="Checkout" class="btn-secondary">Check Out</button>
+        </form>
+    </div>
+}
+else
+{
+    <h3>There are no orders to review</h3>
+}
+

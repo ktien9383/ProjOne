@@ -1,0 +1,101 @@
+﻿@{
+    Layout = "_MainMenu";
+}
+<div>
+    <h3 style="text-align: center">@ViewBag.title</h3>
+
+    <form method="post" action="/Review/Save">
+         <p>
+              <input type="hidden" name="id" value=@ViewBag.order.Id>
+              <input type="hidden" name="currdate" value="@DateTime.Now.ToString("MM/dd/yyyy")">
+         </p>
+         <p>
+              <label>Customer Email: <input type="text" name="custname" id="custname" value="@ViewBag.order.Custname" disabled /></label> 
+         </p>
+
+        @if (ViewBag.order.Category == "Salad Bowl" || ViewBag.order.Category == "Vermicelli Bowl" || ViewBag.order.Category == "Rice Bowl")
+        {
+            <p>
+                <label>Pick a bowl below</label><br />
+            </p>
+            <p>
+                @foreach (var category in ViewBag.categories)
+                {
+                    <span>
+                        <input type="radio" name="category" id="@category.Key" value="@category.Value" checked=@(category.Key == ViewBag.order.Category) />
+                        <label for="@category.Key">@category.Value</label>
+                    </span>
+                }
+            </p>
+            <p>
+                <label>Pick a protein below</label><br />
+            </p>
+            <p>
+                @foreach (var protein in ViewBag.proteins1)
+                {
+                    <span>
+                       <input type="radio" name="item" id="@protein.Key" value="@protein.Value" checked=@(protein.Key == ViewBag.order.Item) />
+                       <label for="@protein.Key">@protein.Value</label>
+                   </span>
+                } 
+                <br />
+                @foreach (var protein in ViewBag.proteins2)
+                {
+                    <span>
+                       <input type="radio" name="item" id="@protein.Key" value="@protein.Value" checked=@(protein.Key == ViewBag.order.Item) />
+                       <label for="@protein.Key">@protein.Value</label>
+                   </span>
+                } 
+           </p>
+         }
+        else if (ViewBag.order.Category == "Banh Mi")
+        {
+            <p>
+                <input type="hidden" name="category" value="Banh Mi">
+            </p>
+            <p>
+                <label>Pick a protein below</label><br />
+            </p>
+            <p>
+            @foreach (var protein in ViewBag.protein1)
+            {
+               <input type="radio" name="item" id="@protein.Key" value="@protein.Value" checked=@(protein.Key == ViewBag.order.Item)/>
+               <label for="@protein.Key">@protein.Value</label> 
+            }
+            <br />
+            @foreach (var protein in ViewBag.protein2)
+            {
+               <input type="radio" name="item" id="@protein.Key" value="@protein.Value" checked=@(protein.Key == ViewBag.order.Item) />
+               <label for="@protein.Key">@protein.Value</label>   
+            }
+            </p>
+        }
+        else if (ViewBag.order.Category == "Snacks")
+        {
+            <p>
+                <input type="hidden" name="category" value="Snacks">
+            </p>
+            <p>
+                <label>Pick a snack below</label><br />
+            </p>
+            <p>
+            @foreach (var snack in ViewBag.snacks1)
+            {
+               <input type="radio" name="item" id="@snack.Key" value="@snack.Value" checked=@(snack.Key == ViewBag.order.Item) />
+               <label for="@snack.Key">@snack.Value</label> 
+            }
+            <br />
+            @foreach (var snack in ViewBag.snacks2)
+            {
+               <input type="radio" name="item" id="@snack.Key" value="@snack.Value" checked=@(snack.Key == ViewBag.order.Item) />
+               <label for="@snack.Key">@snack.Value</label> 
+            }
+            <br />
+          </p>
+         }
+        <p>
+            <input type="submit" value="Submit">
+        </p>
+    </form>
+    <hr />
+</div>

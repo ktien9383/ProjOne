@@ -31,6 +31,11 @@ namespace Vpop
             //    options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddRazorPages();
 
+            //Add the following for session to work
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(60);
+            });
+
             services.Configure<IdentityOptions>(options =>
                options.Password.RequiredLength = 10
                );
@@ -51,6 +56,9 @@ namespace Vpop
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            //add for the use of session
+            app.UseSession();
 
             app.UseRouting();
 

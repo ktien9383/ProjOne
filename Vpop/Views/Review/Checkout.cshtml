@@ -1,0 +1,50 @@
+﻿@{
+    Layout = "_MainMenu";
+}
+
+<div>
+    <h3 style="text-align: center">@ViewBag.title</h3>
+
+    @if (ViewBag.orders == null)
+    {
+        <p>There are no orders to display</p>
+    }
+    else 
+    {
+        <table class="table">
+            <tr>
+                <td>Order Date: @ViewBag.currdate</td>
+            </tr>
+            <tr>
+                <td>Customer Email: @ViewBag.custname</td>
+            </tr>
+            <tr>
+                <th>
+                    Order Number
+                </th>
+                 <th>
+                    Category
+                </th>
+                <th>
+                    Item
+                </th>   
+                 <th>
+                    Price
+                </th>  
+            </tr>
+            @foreach (var ord in ViewBag.orders)
+            {
+                <tr>
+                    <td>@ord.Id</td>
+                    <td>@ord.Category</td>
+                    <td>@ord.Item</td>
+                    <td>$@ord.Price</td>
+                </tr>
+            }
+            <tr>
+                <td>Total Price: $@ViewBag.totalprice</td>
+            </tr>
+        </table>
+    }
+</div>
+

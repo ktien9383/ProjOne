@@ -1,0 +1,54 @@
+﻿@model Vpop.ViewModels.OrderBowlsViewModel;
+
+@{
+    ViewData["Title"] = "Bowls Order Page";
+    Layout = "_MainMenu";
+}
+
+ <h3 style="text-align: center">Bowls Order Form</h3>
+
+ <form asp-controller="Bowls" asp-action="Index" method="post">
+      <div>
+            <input type="hidden" name="Custname" value=" ">
+      </div>
+      <div>
+          <label>Pick a bowl below</label><br />
+          <p>
+              @foreach (var category in Model.CategoryChoices)
+              {
+                 <input type="radio" name="Category" id="@category.Key" value="@category.Value" checked=@(category.Key == "Rice Bowl")/>
+                 <label for="@category.Key">@category.Value</label> 
+              }
+            <br />
+              <span asp-validation-for="Category"></span>
+          </p>
+      </div>
+      <div>
+          <label>Pick a protein below</label><br />
+          <p>
+              @foreach (var protein in Model.Protein1)
+              {
+                 <input type="radio" name="Item" id="@protein.Key" value="@protein.Value" checked=@(protein.Key == "Veggie ")/>
+                 <label for="@protein.Key">@protein.Value</label> 
+              }
+            <br />
+              @foreach (var protein in Model.Protein2)
+              {
+                 <input type="radio" name="Item" id="@protein.Key" value="@protein.Value" checked=@(protein.Key == "Veggie ")/>
+                 <label for="@protein.Key">@protein.Value</label>   
+              }
+              <span asp-validation-for="Item"></span>
+          </p>
+      </div>
+       <div>
+           <p>
+               <input type="hidden" name="Currdate" value="@DateTime.Now.ToString("MM/dd/yyyy")">
+           </p>
+       </div>
+       <div>
+           <p>
+              <input type="submit" value="Submit">
+           </p>
+       </div>
+ </form>
+ <hr />
